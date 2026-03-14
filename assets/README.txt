@@ -3,5 +3,6 @@
 Ожидаемые имена файлов:
 - alexander-borisovich-1.jpg
 - alexander-borisovich-2.jpg
+- alexander-borisovich-3.jpg
 
 Можно использовать .jpg или переименовать исходные файлы в эти имена.

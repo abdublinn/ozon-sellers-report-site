@@ -259,8 +259,7 @@ main {
   line-height: 1.6;
 }
 
-.charts,
-.insight-charts {
+.charts {
   display: grid;
   gap: 18px;
 }
@@ -360,6 +359,12 @@ svg {
   gap: 18px;
 }
 
+.portrait-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
 .portrait-card,
 .bio-card {
   background: rgba(255, 251, 245, 0.86);
@@ -387,6 +392,14 @@ svg {
     radial-gradient(circle at top left, rgba(196, 77, 37, 0.24), transparent 30%),
     radial-gradient(circle at bottom right, rgba(255, 185, 80, 0.15), transparent 35%),
     linear-gradient(180deg, rgba(34, 26, 18, 0.96), rgba(21, 16, 12, 0.96));
+}
+
+.portrait-card-compact {
+  min-height: 340px;
+  background:
+    radial-gradient(circle at top right, rgba(13, 138, 106, 0.25), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(26, 106, 168, 0.18), transparent 35%),
+    linear-gradient(180deg, rgba(20, 29, 36, 0.98), rgba(15, 18, 26, 0.98));
 }
 
 .portrait-card img {
@@ -472,6 +485,29 @@ svg {
 
 .contact-block a {
   color: var(--accent-blue);
+}
+
+.report-embedded-chart {
+  margin: 22px 0 34px;
+}
+
+.report-embedded-chart .chart-card {
+  padding: 20px;
+  box-shadow: none;
+}
+
+.report-embedded-chart .card-head {
+  margin-bottom: 14px;
+}
+
+.report-embedded-chart .chart-summary {
+  margin-top: 14px;
+}
+
+.report-embed-intro {
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 .report-layout {
@@ -655,7 +691,8 @@ svg {
   }
 
   .metric-grid,
-  .bio-columns {
+  .bio-columns,
+  .portrait-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -680,7 +717,8 @@ svg {
 
   .hero-stats,
   .metric-grid,
-  .bio-columns {
+  .bio-columns,
+  .portrait-strip {
     grid-template-columns: 1fr;
   }
 

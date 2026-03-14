@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ozon Furniture Leaders Report</title>
+  <title>Анатомия мебельного Ozon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     <header class="hero">
       <div class="hero-copy">
         <p class="eyebrow">Ozon Analytics • 14.02-14.03.2026</p>
-        <h1>Интерактивный сайт по отчету о лидерах мебельного рынка Ozon</h1>
+        <h1>Анатомия мебельного Ozon</h1>
         <p class="hero-text">
           На странице собраны все слова, таблицы и выводы из исходного отчета, а также интерактивные графики для
           быстрого сравнения селлеров, ценовой политики, трафика, логистики, концентрации продаж и рекламных когорт.
@@ -24,10 +24,10 @@
       <aside class="hero-panel">
         <p class="panel-title">Что внутри</p>
         <ul class="hero-list">
-          <li>Полный текст отчета с таблицами и цитатами</li>
+          <li>Полный текст отчета с таблицами, цитатами и навигацией</li>
           <li>Интерактивные графики по ключевым управленческим вопросам</li>
-          <li>Отдельные корректные версии графиков 11.4 и 14.3</li>
-          <li>Авторский блок Александра Борисовича</li>
+          <li>Корректные версии графиков 11.4 и 14.3, встроенные в соответствующие разделы отчета</li>
+          <li>Авторский блок Александра Борисовича с контактами и фото-слотами</li>
         </ul>
       </aside>
     </header>
@@ -109,47 +109,6 @@
         </div>
       </section>
 
-      <section class="insight-charts" id="insight-charts">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Исправленные графики</p>
-            <h2>Новые версии 11.4 и 14.3</h2>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <div class="card-head">
-            <div>
-              <p class="card-kicker">11.4</p>
-              <h3>Насколько равномерно распределены продажи</h3>
-            </div>
-            <div class="card-note">
-              Линии показывают, какая доля ассортимента нужна, чтобы закрыть 10%, 20%, 50%, 80%, 90% и 100% заказов.
-            </div>
-          </div>
-          <div class="chart-wrap">
-            <svg id="concentration-chart" viewBox="0 0 960 470" role="img" aria-label="Профиль концентрации продаж"></svg>
-          </div>
-          <div class="chart-summary" id="concentration-summary"></div>
-        </div>
-
-        <div class="chart-card">
-          <div class="card-head">
-            <div>
-              <p class="card-kicker">14.3</p>
-              <h3>Конверсия показа в заказ по когортам ДРР</h3>
-            </div>
-            <div class="card-note">
-              Столбцы показывают долю заказов, линия — конверсию показа в заказ. Так видно и объем, и качество когорты.
-            </div>
-          </div>
-          <div class="chart-wrap">
-            <svg id="drr-chart" viewBox="0 0 960 470" role="img" aria-label="Конверсия по когортам ДРР"></svg>
-          </div>
-          <div class="chart-summary" id="drr-summary"></div>
-        </div>
-      </section>
-
       <section class="about" id="about">
         <div class="section-heading">
           <div>
@@ -173,80 +132,105 @@
               </div>
             </figure>
 
-            <figure class="portrait-card portrait-card-accent">
-              <img
-                src="./assets/alexander-borisovich-2.jpg"
-                alt="Александр Борисович в синем костюме"
-                onload="this.parentElement.classList.add('loaded')"
-                onerror="this.remove()"
-              >
-              <div class="portrait-fallback">
-                <span>Система</span>
-                <small>Второй слот готов под `assets/alexander-borisovich-2.jpg`.</small>
-              </div>
-            </figure>
+            <div class="portrait-strip">
+              <figure class="portrait-card portrait-card-accent">
+                <img
+                  src="./assets/alexander-borisovich-2.jpg"
+                  alt="Александр Борисович в синем костюме"
+                  onload="this.parentElement.classList.add('loaded')"
+                  onerror="this.remove()"
+                >
+                <div class="portrait-fallback">
+                  <span>Система</span>
+                  <small>Второй слот готов под `assets/alexander-borisovich-2.jpg`.</small>
+                </div>
+              </figure>
+
+              <figure class="portrait-card portrait-card-compact">
+                <img
+                  src="./assets/alexander-borisovich-3.jpg"
+                  alt="Александр Борисович"
+                  onload="this.parentElement.classList.add('loaded')"
+                  onerror="this.remove()"
+                >
+                <div class="portrait-fallback">
+                  <span>Метод</span>
+                  <small>Третий слот готов под `assets/alexander-borisovich-3.jpg`.</small>
+                </div>
+              </figure>
+            </div>
           </div>
 
           <div class="bio-card">
+            <p class="eyebrow">#знакомство</p>
             <blockquote class="quote-panel">
-              «Предприниматель — это не отличник. Это человек-бардак. Он должен творить.»
-              <br>
-              <strong>А хороший консультант — человек-бардак с методологией.</strong>
+              Владимир Седов, основатель «Асконы», однажды сказал: «Предприниматель — это не отличник. Это человек-бардак. Он должен творить.»
+              А если бы он знал меня, он бы точно добавил: <strong>«А вот хороший консультант — это человек-бардак с методологией.»</strong>
             </blockquote>
 
+            <p>А я — как раз такой.</p>
             <p>
-              Когда Александр Борисович приходит в компанию, он не приносит одну “правильную картинку”.
-              Он показывает несколько реальностей, в которых можно жить и работать, помогает выбрать подходящую,
-              а затем превращает хаос в структуру, систему и план — с логикой и смыслами самой команды.
+              Когда я прихожу в компанию, я не предлагаю одну «правильную» картинку. Я показываю несколько реальностей,
+              в которых можно жить и работать. Помогаю выбрать ту, что подходит именно вам. А потом, когда пыль уляжется, я
+              собираю из этого хаоса структуру, систему, план — с вашей логикой и с вашими смыслами.
             </p>
-
             <p>
-              Он не чинит то, что “не работает”. Он показывает, почему это не должно было работать изначально,
-              и как перестроить систему так, чтобы она действительно заработала. Это работа методолога,
-              систематизатора и практика, который думает головой и руками одновременно.
+              Я - методолог и систематизатор. И если сначала кажется, что «всё взорвалось» - значит, мы добрались до сути.
+              Я не исправляю то, что «не работает». Я показываю, почему оно не должно было работать изначально, и как сделать иначе,
+              чтобы действительно заработало. Я не настраиваю KPI. Я показываю, почему их не стоило настраивать так, как вы это делали.
             </p>
 
             <div class="bio-columns">
               <div class="bio-block">
-                <h3>Что делает</h3>
+                <h3>Что я делаю</h3>
                 <ul>
-                  <li>Раздвигает границы управленческого мышления</li>
-                  <li>Помогает увидеть системные конфликты внутри бизнеса</li>
-                  <li>Переводит философию и концепции в методики и инструменты</li>
-                  <li>Соединяет модернизм и постмодернизм под конкретный контекст</li>
-                  <li>Придумывает решение, докручивает идею и внедряет ее с командой</li>
+                  <li>Раздвигаю границы управленческого мышления</li>
+                  <li>Помогаю разобраться в системных конфликтах внутри бизнеса</li>
+                  <li>Перевожу философию и концепции в методики и инструменты</li>
+                  <li>Соединяю модернизм и постмодернизм — выбираю подходящий именно вашему контексту</li>
                 </ul>
               </div>
 
               <div class="bio-block">
-                <h3>Образование</h3>
+                <h3>Работаю как головой, так и руками</h3>
                 <ul>
-                  <li>Инженер, системы управления подводной лодкой — СПб ИТМО</li>
-                  <li>Экономист, финансы и кредит — Институт экономики и финансов</li>
-                  <li>1000 и 1 курс, тренинг и практическая школа поверх базового образования</li>
+                  <li>Придумаю решение</li>
+                  <li>Докручу идею</li>
+                  <li>Превращу в методику и внедрю с командой</li>
                 </ul>
               </div>
             </div>
 
             <div class="bio-columns">
               <div class="bio-block">
-                <h3>О себе</h3>
+                <h3>Образование</h3>
                 <ul>
-                  <li>Театры и концерты 4–6 раз в месяц</li>
-                  <li>Музеи, выставки и постоянный культурный маршрут</li>
-                  <li>Фитнес 5 раз в неделю</li>
-                  <li>Танго, бачата, румба, фокстрот и еще несколько танцев</li>
-                  <li>Шашки, книги, лекции, конспекты и маргиналии</li>
-                  <li>Может порекомендовать отличную книгу почти под любой повод</li>
+                  <li>Инженер (системы управления подводной лодкой), СПб ИТМО</li>
+                  <li>Экономист (финансы и кредит), НОУ «Институт экономики и финансов»</li>
+                  <li>1000 и 1 различных курсов и тренингов</li>
                 </ul>
               </div>
 
-              <div class="bio-block contact-block">
-                <h3>Контакты</h3>
-                <p><strong>Город:</strong> Санкт-Петербург</p>
-                <p><strong>Telegram:</strong> <a href="https://t.me/AleksandrBorisovich73" target="_blank" rel="noreferrer">@AleksandrBorisovich73</a></p>
-                <p><strong>Блог:</strong> <a href="https://t.me/ab_dublin" target="_blank" rel="noreferrer">t.me/ab_dublin</a></p>
+              <div class="bio-block">
+                <h3>О себе</h3>
+                <ul>
+                  <li>Хожу в театр и на концерты 4-6 раз в месяц</li>
+                  <li>Посещаю музеи и выставки</li>
+                  <li>Занимаюсь фитнесом 5 раз в неделю</li>
+                  <li>Танцую танго, бачату, румбу, фокстрот и еще несколько</li>
+                  <li>Иногда играю в шашки</li>
+                  <li>Читаю, слушаю лекции, веду конспекты и маргиналии</li>
+                  <li>Могу порекомендовать отличную книгу по любому поводу - просто спросите 😉</li>
+                </ul>
               </div>
+            </div>
+
+            <div class="bio-block contact-block">
+              <h3>Контакты</h3>
+              <p><strong>Город:</strong> Санкт-Петербург</p>
+              <p><strong>Telegram:</strong> <a href="https://t.me/AleksandrBorisovich73" target="_blank" rel="noreferrer">@AleksandrBorisovich73</a></p>
+              <p><strong>Мой блог в Телеграм:</strong> <a href="https://t.me/ab_dublin" target="_blank" rel="noreferrer">t.me/ab_dublin</a></p>
+              <p><strong>Мой блог на Дзене:</strong> <a href="https://dzen.ru/dbs_dubas" target="_blank" rel="noreferrer">dzen.ru/dbs_dubas</a></p>
             </div>
           </div>
         </div>

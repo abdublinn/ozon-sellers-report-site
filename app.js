@@ -82,10 +82,10 @@ async function init() {
   renderSegmentChart();
   renderScatterChart();
   renderFunnelChart();
+  await renderFullReport();
   renderConcentrationChart();
   renderDrrChart();
   installActiveNavObserver();
-  await renderFullReport();
 }
 
 function formatRubles(value) {
@@ -148,6 +148,7 @@ function renderSectionNav() {
     link.textContent = item.label;
     container.append(link);
   });
+  container.querySelector('a[href="#insight-charts"]')?.remove();
 }
 
 function renderComparisonControls() {
@@ -298,6 +299,7 @@ function renderFunnelChart() {
 function renderConcentrationChart() {
   const svg = document.getElementById("concentration-chart");
   const summary = document.getElementById("concentration-summary");
+  if (!svg || !summary) return;
   svg.innerHTML = "";
   summary.innerHTML = "";
 
@@ -358,6 +360,7 @@ function renderConcentrationChart() {
 function renderDrrChart() {
   const svg = document.getElementById("drr-chart");
   const summary = document.getElementById("drr-summary");
+  if (!svg || !summary) return;
   svg.innerHTML = "";
   summary.innerHTML = "";
 
@@ -548,6 +551,8 @@ async function renderFullReport() {
     const markdown = await response.text();
     reportContent.innerHTML = "";
     parseMarkdown(markdown).forEach((node) => reportContent.append(node));
+    normalizeReportStructure(reportContent);
+    injectReportCharts(reportContent);
     renderReportToc(reportContent);
   } catch (error) {
     reportContent.innerHTML = `
@@ -556,6 +561,74 @@ async function renderFullReport() {
       <p>Файл отчета: <code>Селлеры/ozon_sellers_fullmetrics_march2026.md</code></p>
     `;
   }
+}
+
+function normalizeReportStructure(reportContent) {
+  const title = reportContent.querySelector("h1");
+  if (title) title.textContent = "Анатомия мебельного Ozon";
+
+  [...reportContent.querySelectorAll("h2, h3")].forEach((heading) => {
+    heading.textContent = heading.textContent.replace(/^(\d+)((?:\.\d+)*)/, (_, major, suffix) => {
+      const map = { "10": "14", "11": "10", "12": "11", "13": "12", "14": "13" };
+      return `${map[major] || major}${suffix || ""}`;
+    });
+  });
+}
+
+function injectReportCharts(reportContent) {
+  const concentrationHeading = findReportHeading(reportContent, "10.4");
+  if (concentrationHeading && !document.getElementById("concentration-chart")) {
+    concentrationHeading.insertAdjacentElement("afterend", buildEmbeddedChartCard({
+      kicker: "10.4",
+      title: "Интерпретация: насколько равномерно распределены продажи",
+      note: "Линии показывают, какая доля ассортимента нужна, чтобы закрыть 10%, 20%, 50%, 80%, 90% и 100% заказов.",
+      intro: "Корректная версия графика показывает профиль концентрации продаж и отклонение от равномерного портфеля, а не просто долю топовых SKU.",
+      svgId: "concentration-chart",
+      summaryId: "concentration-summary",
+      viewBox: "0 0 960 470",
+      ariaLabel: "Насколько равномерно распределены продажи"
+    }));
+  }
+
+  const drrHeading = findReportHeading(reportContent, "13.3");
+  if (drrHeading && !document.getElementById("drr-chart")) {
+    drrHeading.insertAdjacentElement("afterend", buildEmbeddedChartCard({
+      kicker: "13.3",
+      title: "Сравнение: конверсия показа в заказ по когортам ДРР",
+      note: "Столбцы показывают долю заказов, линия — конверсию показа в заказ. Так видно и объем, и качество когорты.",
+      intro: "Здесь разделены два разных смысла: где лежит основной объем заказов и в каких когортах действительно выше эффективность рекламы.",
+      svgId: "drr-chart",
+      summaryId: "drr-summary",
+      viewBox: "0 0 960 470",
+      ariaLabel: "Конверсия показа в заказ по когортам ДРР"
+    }));
+  }
+}
+
+function findReportHeading(reportContent, prefix) {
+  return [...reportContent.querySelectorAll("h2, h3")].find((heading) => heading.textContent.trim().startsWith(prefix));
+}
+
+function buildEmbeddedChartCard({ kicker, title, note, intro, svgId, summaryId, viewBox, ariaLabel }) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "report-embedded-chart";
+  wrapper.innerHTML = `
+    <div class="chart-card">
+      <div class="card-head">
+        <div>
+          <p class="card-kicker">${kicker}</p>
+          <h3>${title}</h3>
+        </div>
+        <div class="card-note">${note}</div>
+      </div>
+      <p class="report-embed-intro">${intro}</p>
+      <div class="chart-wrap">
+        <svg id="${svgId}" viewBox="${viewBox}" role="img" aria-label="${ariaLabel}"></svg>
+      </div>
+      <div class="chart-summary" id="${summaryId}"></div>
+    </div>
+  `;
+  return wrapper;
 }
 
 function renderReportToc(contentElement) {
