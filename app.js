@@ -613,10 +613,22 @@ function normalizeReportStructure(reportContent) {
   const title = reportContent.querySelector("h1");
   if (title) title.textContent = "Анатомия мебельного Ozon";
 
+  const map = { "10": "14", "11": "10", "12": "11", "13": "12", "14": "13" };
+  let currentBlockNumber = null;
+
   [...reportContent.querySelectorAll("h2, h3")].forEach((heading) => {
-    heading.textContent = heading.textContent.replace(/^(\d+)((?:\.\d+)*)/, (_, major, suffix) => {
-      const map = { "10": "14", "11": "10", "12": "11", "13": "12", "14": "13" };
-      return `${map[major] || major}${suffix || ""}`;
+    if (heading.tagName === "H2") {
+      heading.textContent = heading.textContent.replace(/^(БЛОК\s+)(\d+)(\.\s*)/i, (_, prefix, major, suffix) => {
+        currentBlockNumber = map[major] || major;
+        return `${prefix}${currentBlockNumber}${suffix}`;
+      });
+      return;
+    }
+
+    if (!currentBlockNumber) return;
+
+    heading.textContent = heading.textContent.replace(/^(\d+)(\.\d+)(\.\s*)?/, (_, _major, minor, suffix = ". ") => {
+      return `${currentBlockNumber}${minor}${suffix}`;
     });
   });
 }
