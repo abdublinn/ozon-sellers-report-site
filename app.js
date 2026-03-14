@@ -153,6 +153,8 @@ function renderSectionNav() {
     const link = container.querySelector(`a[href="${href}"]`);
     if (link) container.append(link);
   });
+  const aboutLink = container.querySelector('a[href="#about"]');
+  if (aboutLink) aboutLink.textContent = "Об авторе отчета";
 }
 
 function renderComparisonControls() {
@@ -559,6 +561,7 @@ async function renderFullReport() {
     injectReportCharts(reportContent);
     renderReportToc(reportContent);
     refineReportToc();
+    colorizeSellerMentions(reportContent);
   } catch (error) {
     reportContent.innerHTML = `
       <h3>Не удалось загрузить markdown-отчет</h3>
@@ -573,6 +576,37 @@ function refineReportToc() {
   tocLinks.forEach((link) => {
     link.textContent = link.textContent.replace(/\s*\([^)]*\)/g, "").trim();
     if (/^5\./.test(link.textContent)) link.remove();
+  });
+}
+
+function colorizeSellerMentions(root) {
+  const sellerEntries = Object.entries(sellerColors).sort((a, b) => b[0].length - a[0].length);
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (parent.closest("a, code, pre, script, style, .seller-mention")) return NodeFilter.FILTER_REJECT;
+      return sellerEntries.some(([name]) => node.nodeValue.includes(name))
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_REJECT;
+    }
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+  textNodes.forEach((node) => {
+    let html = escapeHtml(node.nodeValue);
+    sellerEntries.forEach(([name, color]) => {
+      const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      html = html.replace(new RegExp(escapedName, "g"), `<span class="seller-mention" style="color:${color}">${name}</span>`);
+    });
+    if (html !== escapeHtml(node.nodeValue)) {
+      const span = document.createElement("span");
+      span.innerHTML = html;
+      node.parentNode.replaceChild(span, node);
+    }
   });
 }
 
@@ -798,6 +832,13 @@ function inlineMarkdown(text) {
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/`(.+?)`/g, "<code>$1</code>")
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 function buildTable(lines) {

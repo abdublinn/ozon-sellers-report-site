@@ -687,6 +687,10 @@ svg {
   color: var(--ink);
 }
 
+.seller-mention {
+  font-weight: 800;
+}
+
 .report-content em {
   color: var(--muted);
 }
