@@ -1,8 +1,8 @@
 Положите сюда фотографии Александра Борисовича, и сайт подхватит их автоматически.
 
 Ожидаемые имена файлов:
-- alexander-borisovich-1.jpg
-- alexander-borisovich-2.jpg
-- alexander-borisovich-3.jpg
+- alexander-borisovich-1.png
+- alexander-borisovich-2.png
+- alexander-borisovich-3.png
 
 Можно использовать .jpg или переименовать исходные файлы в эти имена.
