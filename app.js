@@ -575,7 +575,6 @@ function refineReportToc() {
   const tocLinks = [...document.querySelectorAll("#report-toc nav a")];
   tocLinks.forEach((link) => {
     link.textContent = link.textContent.replace(/\s*\([^)]*\)/g, "").trim();
-    if (/^5\./.test(link.textContent)) link.remove();
   });
 }
 
@@ -684,7 +683,7 @@ function renderReportToc(contentElement) {
   const title = document.createElement("h3");
   title.textContent = "Навигация по отчету";
   const nav = document.createElement("nav");
-  [...contentElement.querySelectorAll("h2, h3")].forEach((heading, index) => {
+  [...contentElement.querySelectorAll("h2")].forEach((heading, index) => {
     const id = `report-heading-${index + 1}`;
     heading.id = id;
     const link = document.createElement("a");
