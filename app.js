@@ -149,6 +149,10 @@ function renderSectionNav() {
     container.append(link);
   });
   container.querySelector('a[href="#insight-charts"]')?.remove();
+  ["#overview", "#charts", "#report", "#about"].forEach((href) => {
+    const link = container.querySelector(`a[href="${href}"]`);
+    if (link) container.append(link);
+  });
 }
 
 function renderComparisonControls() {
@@ -554,6 +558,7 @@ async function renderFullReport() {
     normalizeReportStructure(reportContent);
     injectReportCharts(reportContent);
     renderReportToc(reportContent);
+    refineReportToc();
   } catch (error) {
     reportContent.innerHTML = `
       <h3>Не удалось загрузить markdown-отчет</h3>
@@ -561,6 +566,14 @@ async function renderFullReport() {
       <p>Файл отчета: <code>Селлеры/ozon_sellers_fullmetrics_march2026.md</code></p>
     `;
   }
+}
+
+function refineReportToc() {
+  const tocLinks = [...document.querySelectorAll("#report-toc nav a")];
+  tocLinks.forEach((link) => {
+    link.textContent = link.textContent.replace(/\s*\([^)]*\)/g, "").trim();
+    if (/^5\./.test(link.textContent)) link.remove();
+  });
 }
 
 function normalizeReportStructure(reportContent) {

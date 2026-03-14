@@ -55,10 +55,26 @@ body {
   grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
   gap: 24px;
   padding: 36px;
-  background: linear-gradient(140deg, rgba(255, 250, 242, 0.96), rgba(246, 234, 215, 0.88));
+  background:
+    radial-gradient(circle at top left, rgba(196, 77, 37, 0.16), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(26, 106, 168, 0.12), transparent 30%),
+    linear-gradient(140deg, rgba(255, 250, 242, 0.96), rgba(246, 234, 215, 0.88));
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 18px 18px auto auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 185, 80, 0.28), transparent 68%);
+  pointer-events: none;
 }
 
 .eyebrow,
@@ -86,7 +102,7 @@ h1 {
   max-width: 13ch;
 }
 
-.hero-text,
+.hero-ribbon,
 .card-note,
 .chart-summary,
 .tooltip,
@@ -98,11 +114,24 @@ h1 {
   color: var(--muted);
 }
 
-.hero-text {
-  max-width: 62ch;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  margin: 18px 0 0;
+.hero-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hero-ribbon span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.86);
+  border: 1px solid rgba(33, 22, 13, 0.08);
+  color: var(--ink);
+  font-weight: 700;
+  box-shadow: 0 10px 24px rgba(59, 36, 13, 0.06);
 }
 
 .hero-stats {
@@ -528,6 +557,10 @@ svg {
   position: sticky;
   top: 88px;
   padding: 18px;
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
 }
 
 .report-toc h3 {
@@ -550,6 +583,15 @@ svg {
 .report-toc a:hover {
   background: var(--accent-soft);
   color: var(--ink);
+}
+
+.report-toc::-webkit-scrollbar {
+  width: 10px;
+}
+
+.report-toc::-webkit-scrollbar-thumb {
+  background: rgba(33, 22, 13, 0.18);
+  border-radius: 999px;
 }
 
 .report-content {
