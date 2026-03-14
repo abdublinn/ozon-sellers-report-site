@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ozon Furniture Leaders Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Ozon Analytics • 14.02-14.03.2026</p>
+        <h1>Интерактивный сайт по отчету о лидерах мебельного рынка Ozon</h1>
+        <p class="hero-text">
+          На странице собраны все слова, таблицы и выводы из исходного отчета, а также интерактивные графики для
+          быстрого сравнения селлеров, ценовой политики, трафика, логистики, концентрации продаж и рекламных когорт.
+        </p>
+        <div class="hero-stats" id="hero-stats"></div>
+      </div>
+      <aside class="hero-panel">
+        <p class="panel-title">Что внутри</p>
+        <ul class="hero-list">
+          <li>Полный текст отчета с таблицами и цитатами</li>
+          <li>Интерактивные графики по ключевым управленческим вопросам</li>
+          <li>Отдельные корректные версии графиков 11.4 и 14.3</li>
+          <li>Авторский блок Александра Борисовича</li>
+        </ul>
+      </aside>
+    </header>
+
+    <nav class="section-nav" id="section-nav"></nav>
+
+    <main>
+      <section class="overview" id="overview">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Обзор</p>
+            <h2>Быстрый снимок рынка</h2>
+          </div>
+        </div>
+        <div class="metric-grid" id="metric-grid"></div>
+      </section>
+
+      <section class="charts" id="charts">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Графики</p>
+            <h2>Интерактивная аналитика по ключевым метрикам</h2>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">График 1</p>
+              <h3>Сравнение селлеров по метрикам</h3>
+            </div>
+            <div class="toolbar" id="metric-switcher"></div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="comparison-chart" viewBox="0 0 960 420" role="img" aria-label="Сравнение селлеров"></svg>
+          </div>
+          <div class="legend" id="comparison-legend"></div>
+        </div>
+
+        <div class="chart-split">
+          <article class="chart-card">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">График 2</p>
+                <h3>Ценовые сегменты</h3>
+              </div>
+              <div class="toolbar small" id="segment-highlight"></div>
+            </div>
+            <div class="chart-wrap">
+              <svg id="segment-chart" viewBox="0 0 960 420" role="img" aria-label="Ценовые сегменты"></svg>
+            </div>
+          </article>
+
+          <article class="chart-card">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">График 3</p>
+                <h3>Реклама vs нетто-выручка</h3>
+              </div>
+              <div class="card-note">Размер круга = выкуп, цвет = селлер</div>
+            </div>
+            <div class="chart-wrap">
+              <svg id="scatter-chart" viewBox="0 0 960 420" role="img" aria-label="Реклама и выручка"></svg>
+            </div>
+          </article>
+        </div>
+
+        <div class="chart-card">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">График 4</p>
+              <h3>Воронка трафика и конверсии</h3>
+            </div>
+            <div class="toolbar" id="funnel-switcher"></div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="funnel-chart" viewBox="0 0 960 420" role="img" aria-label="Воронка трафика"></svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-charts" id="insight-charts">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Исправленные графики</p>
+            <h2>Новые версии 11.4 и 14.3</h2>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">11.4</p>
+              <h3>Насколько равномерно распределены продажи</h3>
+            </div>
+            <div class="card-note">
+              Линии показывают, какая доля ассортимента нужна, чтобы закрыть 10%, 20%, 50%, 80%, 90% и 100% заказов.
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="concentration-chart" viewBox="0 0 960 470" role="img" aria-label="Профиль концентрации продаж"></svg>
+          </div>
+          <div class="chart-summary" id="concentration-summary"></div>
+        </div>
+
+        <div class="chart-card">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">14.3</p>
+              <h3>Конверсия показа в заказ по когортам ДРР</h3>
+            </div>
+            <div class="card-note">
+              Столбцы показывают долю заказов, линия — конверсию показа в заказ. Так видно и объем, и качество когорты.
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="drr-chart" viewBox="0 0 960 470" role="img" aria-label="Конверсия по когортам ДРР"></svg>
+          </div>
+          <div class="chart-summary" id="drr-summary"></div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Об авторе</p>
+            <h2>Александр Борисович — человек-бардак. Но системный.</h2>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <div class="portrait-column">
+            <figure class="portrait-card portrait-card-main">
+              <img
+                src="./assets/alexander-borisovich-1.jpg"
+                alt="Александр Борисович"
+                onload="this.parentElement.classList.add('loaded')"
+                onerror="this.remove()"
+              >
+              <div class="portrait-fallback">
+                <span>АБ</span>
+                <small>Добавьте файл `assets/alexander-borisovich-1.jpg`, и фото появится автоматически.</small>
+              </div>
+            </figure>
+
+            <figure class="portrait-card portrait-card-accent">
+              <img
+                src="./assets/alexander-borisovich-2.jpg"
+                alt="Александр Борисович в синем костюме"
+                onload="this.parentElement.classList.add('loaded')"
+                onerror="this.remove()"
+              >
+              <div class="portrait-fallback">
+                <span>Система</span>
+                <small>Второй слот готов под `assets/alexander-borisovich-2.jpg`.</small>
+              </div>
+            </figure>
+          </div>
+
+          <div class="bio-card">
+            <blockquote class="quote-panel">
+              «Предприниматель — это не отличник. Это человек-бардак. Он должен творить.»
+              <br>
+              <strong>А хороший консультант — человек-бардак с методологией.</strong>
+            </blockquote>
+
+            <p>
+              Когда Александр Борисович приходит в компанию, он не приносит одну “правильную картинку”.
+              Он показывает несколько реальностей, в которых можно жить и работать, помогает выбрать подходящую,
+              а затем превращает хаос в структуру, систему и план — с логикой и смыслами самой команды.
+            </p>
+
+            <p>
+              Он не чинит то, что “не работает”. Он показывает, почему это не должно было работать изначально,
+              и как перестроить систему так, чтобы она действительно заработала. Это работа методолога,
+              систематизатора и практика, который думает головой и руками одновременно.
+            </p>
+
+            <div class="bio-columns">
+              <div class="bio-block">
+                <h3>Что делает</h3>
+                <ul>
+                  <li>Раздвигает границы управленческого мышления</li>
+                  <li>Помогает увидеть системные конфликты внутри бизнеса</li>
+                  <li>Переводит философию и концепции в методики и инструменты</li>
+                  <li>Соединяет модернизм и постмодернизм под конкретный контекст</li>
+                  <li>Придумывает решение, докручивает идею и внедряет ее с командой</li>
+                </ul>
+              </div>
+
+              <div class="bio-block">
+                <h3>Образование</h3>
+                <ul>
+                  <li>Инженер, системы управления подводной лодкой — СПб ИТМО</li>
+                  <li>Экономист, финансы и кредит — Институт экономики и финансов</li>
+                  <li>1000 и 1 курс, тренинг и практическая школа поверх базового образования</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bio-columns">
+              <div class="bio-block">
+                <h3>О себе</h3>
+                <ul>
+                  <li>Театры и концерты 4–6 раз в месяц</li>
+                  <li>Музеи, выставки и постоянный культурный маршрут</li>
+                  <li>Фитнес 5 раз в неделю</li>
+                  <li>Танго, бачата, румба, фокстрот и еще несколько танцев</li>
+                  <li>Шашки, книги, лекции, конспекты и маргиналии</li>
+                  <li>Может порекомендовать отличную книгу почти под любой повод</li>
+                </ul>
+              </div>
+
+              <div class="bio-block contact-block">
+                <h3>Контакты</h3>
+                <p><strong>Город:</strong> Санкт-Петербург</p>
+                <p><strong>Telegram:</strong> <a href="https://t.me/AleksandrBorisovich73" target="_blank" rel="noreferrer">@AleksandrBorisovich73</a></p>
+                <p><strong>Блог:</strong> <a href="https://t.me/ab_dublin" target="_blank" rel="noreferrer">t.me/ab_dublin</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="report" id="report">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Отчет</p>
+            <h2>Полный текст и все таблицы</h2>
+          </div>
+        </div>
+        <div class="report-layout">
+          <aside class="report-toc" id="report-toc"></aside>
+          <article class="report-content" id="report-content">
+            <p>Загрузка отчета...</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="tooltip-template">
+    <div class="tooltip"></div>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>
